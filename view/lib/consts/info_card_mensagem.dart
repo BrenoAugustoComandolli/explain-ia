@@ -5,4 +5,5 @@ class InfoCardMensagem {
   static const String referencias = "Referências: ";
 
   static const String semReferencias = "$referencias nenhuma";
+  static const String digiteMensagem = "Digite aqui sua mensagem...";
 }

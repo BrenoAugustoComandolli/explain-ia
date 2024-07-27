@@ -24,6 +24,20 @@ class ThemeDataEscuro implements IThemeData {
           fontSize: 20,
         ),
       ),
+      iconButtonTheme: const IconButtonThemeData(
+        style: ButtonStyle(
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(7),
+              ),
+              side: BorderSide(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
       cardColor: CoresSistema.primaryColor,
       useMaterial3: true,
     );
