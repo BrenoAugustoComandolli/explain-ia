@@ -7,4 +7,4 @@ class HtmlUtil:
         for umResultado in resultados:
             html_content += f"<li><strong>Score:</strong> {umResultado['score']}<br><strong>Texto:</strong> {umResultado['text']}</li><br>"
         html_content += "</ol>"
-        display(HTML(html_content))
+        print(html_content)

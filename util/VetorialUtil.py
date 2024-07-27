@@ -6,7 +6,7 @@ import uuid
 # Usa o modelo de linguagem BERT que é da Google para ter um pré-treinamento em entendimento de textos
 # O modelo usado no tranformer é um modelo em português e irá usar a GPU para melhor desempenho na busca de sentenças que
 # atendem as necessidades do usuário
-tranformer = SentenceTransformer("neuralmind/bert-large-portuguese-cased", device="cpu", token="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")
+tranformer = SentenceTransformer("neuralmind/bert-large-portuguese-cased", device="cpu", token="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")
 
 # Cria um banco de dados em memória pelo qdrant
 # rant que posteriormente pode ser consultado para buscas pelo modelo de linguagem

@@ -1,0 +1,6 @@
+sentence-transformers
+qdrant-client
+uuid
+langchain
+PyPDF2
+ipython
