@@ -1,3 +1,4 @@
+import 'package:chat_explain_ia/aplicacao/aplicacao.dart';
 import 'package:chat_explain_ia/consts/info_app_consts.dart';
 import 'package:chat_explain_ia/identidade_visual/theme_data_claro.dart';
 import 'package:chat_explain_ia/identidade_visual/theme_data_escuro.dart';
@@ -5,6 +6,7 @@ import 'package:chat_explain_ia/pages/chat/chat_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  Aplicacao.prepararAmbiente();
   runApp(const MyApp());
 }
 

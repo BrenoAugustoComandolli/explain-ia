@@ -1,5 +1,7 @@
+import 'package:chat_explain_ia/aplicacao/injecao.dart';
 import 'package:chat_explain_ia/consts/info_card_mensagem.dart';
 import 'package:chat_explain_ia/data/mensagem_resposta_model.dart';
+import 'package:chat_explain_ia/util/url_util.dart';
 import 'package:flutter/material.dart';
 
 class CardMensagemResposta extends StatelessWidget {
@@ -41,11 +43,16 @@ class _Topico extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      "$titulo $descricao",
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
+    return Row(
+      children: [
+        Text(
+          titulo,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(descricao),
+      ],
     );
   }
 }
@@ -91,6 +98,8 @@ class _ItensListagem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UrlUtil urlUtil = Injecao.getIt.get<UrlUtil>();
+
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -99,15 +108,31 @@ class _ItensListagem extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(top: 5),
           child: ListTile(
-            minTileHeight: 20,
+            minTileHeight: 5,
             leading: const Icon(Icons.link, size: 20),
-            title: Text(
-              listagem[index],
-              style: const TextStyle(fontSize: 12),
+            title: Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                onPressed: () async {
+                  await _redirecionar(urlUtil, index);
+                },
+                child: Text(
+                  listagem[index],
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ),
             ),
           ),
         );
       },
     );
+  }
+
+  Future<void> _redirecionar(urlUtil, index) async {
+    try {
+      await urlUtil.redirecionar(listagem[index]);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 }

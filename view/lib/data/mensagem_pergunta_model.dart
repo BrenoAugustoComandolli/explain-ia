@@ -1,6 +1,6 @@
+import 'package:chat_explain_ia/data/i_mensagem.dart';
 
-
-class MensagemPerguntaModel {
+class MensagemPerguntaModel implements IMensagem {
   final String pergunta;
 
   MensagemPerguntaModel(
