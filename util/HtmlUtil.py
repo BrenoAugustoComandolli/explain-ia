@@ -3,8 +3,11 @@ from IPython.display import display, HTML
 class HtmlUtil:
     @staticmethod
     def formatar_resultado_pesquisa(resultados):
-        html_content = "<h2>Resultados<h2><ol>"
-        for umResultado in resultados:
-            html_content += f"<li><strong>Score:</strong> {umResultado['score']}<br><strong>Texto:</strong> {umResultado['text']}</li><br>"
-        html_content += "</ol>"
-        print(html_content)
+        resposta = resultados[0]['text']
+        arquivo = resultados[0]['arquivo']
+
+        #TODO: Montar url help
+        referencia_arquivos = [arquivo]
+        
+        # Print the HTML content
+        return resposta, referencia_arquivos
