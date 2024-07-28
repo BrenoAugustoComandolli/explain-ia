@@ -1,6 +1,6 @@
 import 'package:chat_explain_ia/aplicacao/injecao.dart';
-import 'package:chat_explain_ia/consts/info_boas_vindas.dart';
-import 'package:chat_explain_ia/consts/info_card_mensagem.dart';
+import 'package:chat_explain_ia/consts/info_boas_vindas_consts.dart';
+import 'package:chat_explain_ia/consts/info_card_mensagem_consts.dart';
 import 'package:chat_explain_ia/data/mensagem_pergunta_model.dart';
 import 'package:chat_explain_ia/data/mensagem_resposta_model.dart';
 import 'package:chat_explain_ia/pages/base_page.dart';
@@ -9,6 +9,7 @@ import 'package:chat_explain_ia/pages/chat/domain/cubit/chat_state.dart';
 import 'package:chat_explain_ia/pages/chat/widgets/card_mensagem_carregamento.dart';
 import 'package:chat_explain_ia/pages/chat/widgets/card_mensagem_pergunta.dart';
 import 'package:chat_explain_ia/pages/chat/widgets/card_mensagem_resposta.dart';
+import 'package:chat_explain_ia/pages/chat/widgets/login_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,6 +40,33 @@ class _ChatPageState extends State<ChatPage> {
             ),
           ],
         ),
+      ),
+      actions: const [
+        _BotaoLogin(),
+      ],
+    );
+  }
+}
+
+class _BotaoLogin extends StatelessWidget {
+  const _BotaoLogin();
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const LoginDialog();
+          },
+        );
+      },
+      icon: const Icon(Icons.person),
+      color: Colors.black,
+      style: ButtonStyle(
+        side: WidgetStateProperty.all(BorderSide.none),
+        overlayColor: WidgetStateProperty.all(Colors.transparent),
       ),
     );
   }
@@ -100,12 +128,12 @@ class _MensagemBoasVindas extends StatelessWidget {
           Icon(Icons.person),
           SizedBox(height: 10),
           Text(
-            InfoBoasVindas.titulo,
+            InfoBoasVindasConsts.titulo,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 10),
           Text(
-            InfoBoasVindas.descricao,
+            InfoBoasVindasConsts.descricao,
             textAlign: TextAlign.center,
           ),
         ],
@@ -171,7 +199,7 @@ class _CampoDigitacao extends StatelessWidget {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          hintText: InfoCardMensagem.digiteMensagem,
+          hintText: InfoCardMensagemConsts.digiteMensagem,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),

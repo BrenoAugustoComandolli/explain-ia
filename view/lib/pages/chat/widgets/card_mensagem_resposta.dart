@@ -1,5 +1,5 @@
 import 'package:chat_explain_ia/aplicacao/injecao.dart';
-import 'package:chat_explain_ia/consts/info_card_mensagem.dart';
+import 'package:chat_explain_ia/consts/info_card_mensagem_consts.dart';
 import 'package:chat_explain_ia/data/mensagem_resposta_model.dart';
 import 'package:chat_explain_ia/util/url_util.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +20,9 @@ class CardMensagemResposta extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _Topico(InfoCardMensagem.resposta, model.resposta),
+            _Topico(InfoCardMensagemConsts.resposta, model.resposta),
             const SizedBox(height: 7),
-            _Topico(InfoCardMensagem.justificativa, model.justificativa),
+            _Topico(InfoCardMensagemConsts.justificativa, model.justificativa),
             const SizedBox(height: 7),
             _TopicoLista(_getTituloReferencias(), model.referencias),
           ],
@@ -32,7 +32,7 @@ class CardMensagemResposta extends StatelessWidget {
   }
 
   String _getTituloReferencias() {
-    return model.referencias.isNotEmpty ? InfoCardMensagem.referencias : InfoCardMensagem.semReferencias;
+    return model.referencias.isNotEmpty ? InfoCardMensagemConsts.referencias : InfoCardMensagemConsts.semReferencias;
   }
 }
 

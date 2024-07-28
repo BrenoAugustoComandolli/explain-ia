@@ -19,7 +19,7 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   Future<void> realizaPergunta(String pergunta) async {
-    _lMensagens.add(MensagemPerguntaModel(pergunta));
+    _lMensagens.add(MensagemPerguntaModel(pergunta, ""));
     emit(ChatPesquisandoState());
 
     final resultado = await _service.realizaPergunta(pergunta);

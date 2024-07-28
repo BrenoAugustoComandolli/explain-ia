@@ -1,4 +1,4 @@
-import 'package:chat_explain_ia/consts/info_erros.dart';
+import 'package:chat_explain_ia/consts/info_erros_consts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UrlUtil {
@@ -7,7 +7,7 @@ class UrlUtil {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
-      throw Exception('${InfoErros.erroRedirecionamento} $url');
+      throw Exception('${InfoErrosConsts.erroRedirecionamento} $url');
     }
   }
 }

@@ -1,4 +1,4 @@
-class InfoCardMensagem {
+class InfoCardMensagemConsts {
   static const String pergunta = "Pergunta: ";
   static const String resposta = "Resposta: ";
   static const String justificativa = "Justificativa: ";
