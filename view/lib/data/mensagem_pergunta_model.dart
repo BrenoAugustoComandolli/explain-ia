@@ -6,4 +6,8 @@ class MensagemPerguntaModel implements IMensagem {
   MensagemPerguntaModel(
     this.pergunta,
   );
+
+  Map<String, dynamic> toJson() => {
+        'pergunta': pergunta,
+      };
 }

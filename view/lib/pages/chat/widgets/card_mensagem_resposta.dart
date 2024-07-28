@@ -43,17 +43,7 @@ class _Topico extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          titulo,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(descricao),
-      ],
-    );
+    return Text('$titulo $descricao');
   }
 }
 
@@ -82,12 +72,7 @@ class _TituloLista extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      titulo,
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
-    );
+    return Text(titulo);
   }
 }
 

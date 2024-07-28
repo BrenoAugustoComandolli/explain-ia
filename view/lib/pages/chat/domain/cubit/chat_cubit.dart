@@ -3,7 +3,6 @@ import 'package:chat_explain_ia/data/mensagem_pergunta_model.dart';
 import 'package:chat_explain_ia/pages/chat/domain/cubit/chat_state.dart';
 import 'package:chat_explain_ia/pages/chat/domain/service/chat_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:result_dart/result_dart.dart';
 
 class ChatCubit extends Cubit<ChatState> {
   ChatCubit(this._service) : super(ChatInicialState());
@@ -23,7 +22,7 @@ class ChatCubit extends Cubit<ChatState> {
     _lMensagens.add(MensagemPerguntaModel(pergunta));
     emit(ChatPesquisandoState());
 
-    final resultado = _service.realizaPergunta(pergunta);
+    final resultado = await _service.realizaPergunta(pergunta);
 
     resultado.fold(
       (success) => _lMensagens.add(success),
