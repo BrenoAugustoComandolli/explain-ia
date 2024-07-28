@@ -4,3 +4,4 @@ uuid
 langchain
 PyPDF2
 ipython
+Flask
