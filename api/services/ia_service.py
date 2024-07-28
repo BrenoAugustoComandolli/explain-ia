@@ -10,9 +10,11 @@ def insere_dados(caminho_arquivos, collection_name):
         VetorialUtil.cria_collection_vetorial(collection_name)
         logging.info(f"Vetor criado com sucesso: {collection_name}")
         
-        for file_name in os.listdir(caminho_arquivos):
-            if file_name.endswith('.pdf') or file_name.endswith('.txt'):
-                processa_arquivo(os.path.join(caminho_arquivos, file_name), collection_name)
+        for root, dirs, files in os.walk(caminho_arquivos):
+            for file_name in files:
+                if file_name.endswith('.pdf') or file_name.endswith('.txt'):
+                    file_path = os.path.join(root, file_name)
+                    processa_arquivo(file_path, collection_name)
     except Exception as e:
         logging.error(f"Erro ao processar os arquivos: {e}")
 

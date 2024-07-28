@@ -4,7 +4,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.http.models import PointStruct, models
 import uuid
 
-config_path = 'resources/config.json'  # Update with the correct path to your JSON file
+config_path = 'resources/config.json'
 with open(config_path, 'r') as config_file:
     config = json.load(config_file)
 
@@ -57,7 +57,7 @@ class VetorialUtil:
         search_result = qdrant_client.search(
             collection_name=collection_name,
             query_vector=embedding,
-            limit=1
+            limit=config['qntd_respostas']
         )
         prompt = []
         for resultado in search_result:
