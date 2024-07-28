@@ -93,7 +93,8 @@ class _ItensListagem extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(top: 5),
           child: ListTile(
-            minTileHeight: 5,
+            minVerticalPadding: 2,
+            minTileHeight: 2,
             leading: const Icon(Icons.link, size: 20),
             title: Align(
               alignment: Alignment.centerLeft,
