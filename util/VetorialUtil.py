@@ -22,12 +22,12 @@ class VetorialUtil:
     # Cria pedaços de sentenças de texto, refenreciando um id para identificar a sentença, um vetor para utilizar 
     # na busca pelo modelo neural e o conteúdoo original para utilização na montagem da respota
     @staticmethod
-    def get_embedding(pedacos_texto, filename):
+    def get_embedding(pedacos_texto, file_referencia):
         pontos = []
         for idx, pedaco in enumerate(pedacos_texto):
             ponto_id = str(uuid.uuid4())
             embedding = transformer.encode(pedaco).tolist()
-            pontos.append(PointStruct(id=ponto_id, vector=embedding, payload={"filename": filename, 'text': pedaco}))
+            pontos.append(PointStruct(id=ponto_id, vector=embedding, payload={"filename": file_referencia, 'text': pedaco}))
         return pontos
     
     # Cria uma coleção de vetores dentro do banco qdrant para posterior busca pelo modelo de linguagem

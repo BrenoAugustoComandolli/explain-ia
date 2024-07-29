@@ -9,12 +9,13 @@ def load_config(config_file):
         return json.load(f)
 
 def inicializa_ia(app):
-    path_arquivos = app.config['caminho_arquivos']
-    collection_name = app.config['collection_name']
+    path_arquivos = app.config.get('caminho_arquivos')
+    collection_name = app.config.get('collection_name')
+    host_refencia = app.config.get('host_referencia')
 
     logging.info(f"Iniciando treinamento da IA com os arquivos na pasta {path_arquivos}.\nEsse processo pode demorar alguns minutos... ")
     
-    insere_dados(path_arquivos, collection_name)
+    insere_dados(path_arquivos, collection_name, host_refencia)
 
 def create_app():
     app = Flask(__name__)

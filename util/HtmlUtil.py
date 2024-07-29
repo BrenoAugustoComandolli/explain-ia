@@ -11,7 +11,7 @@ class HtmlUtil:
         resposta = resultados[0]['text']
         arquivo = resultados[0]['arquivo']
 
-        if config['host_referencia']: 
+        if 'host_referencia' in config and config['host_referencia']:
             referencia_arquivos = config['host_referencia'] + arquivo
         else:
             referencia_arquivos = [arquivo]

@@ -3,7 +3,7 @@
     "modelo_linguagem": "neuralmind/bert-large-portuguese-cased",
 
     "collection_name": "help",
-    "caminho_arquivos": "C:/Bertimbau AI/Arquivos",
+    "caminho_arquivos": "C:/Bertimbau AI/Arquivos/teste",
 
     "qntd_caracteres_pesquisar": 1000,
     "qntd_respostas": 1,
