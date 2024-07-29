@@ -1,4 +1,9 @@
+import json
 from IPython.display import display, HTML
+
+config_path = 'resources/config.json'
+with open(config_path, 'r') as config_file:
+    config = json.load(config_file)
 
 class HtmlUtil:
     @staticmethod
@@ -6,8 +11,9 @@ class HtmlUtil:
         resposta = resultados[0]['text']
         arquivo = resultados[0]['arquivo']
 
-        #TODO: Montar url help
-        referencia_arquivos = [arquivo]
+        if 'host_referencia' in config and config['host_referencia']:
+            referencia_arquivos = config['host_referencia'] + arquivo
+        else:
+            referencia_arquivos = [arquivo]
         
-        # Print the HTML content
         return resposta, referencia_arquivos
