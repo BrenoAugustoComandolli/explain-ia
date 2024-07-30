@@ -60,13 +60,13 @@ def realiza_pesquisa(query, collection_name, login):
         search_results = VetorialUtil.pesquisa_banco_vetorial(collection_name, query_embedding)
 
         if not search_results: 
-            return 'Resposta não encontrada'
+            raise Exception('Resposta não encontrada')
         
         token = recupera_token_usuario(login)
         logging.info(f"O token para {login} recuperado com sucesso")
 
         if not token:
-             return 'Usuário sem token do ChatGpt cadastrado no servidor'
+             raise Exception('Usuário sem token do ChatGpt cadastrado no servidor')
     
         return HtmlUtil.formatar_resultado_pesquisa(search_results, query, token)
     except Exception as e:
@@ -74,6 +74,6 @@ def realiza_pesquisa(query, collection_name, login):
         raise     
 
 def recupera_token_usuario(login):
-    with open('users.json', 'r') as file:
+    with open('resources/users.json', 'r') as file:
         data = json.load(file)
         return data.get(login)

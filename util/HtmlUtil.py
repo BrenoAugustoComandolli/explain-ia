@@ -1,7 +1,7 @@
 import json
 from IPython.display import display, HTML
 import requests
-from consts.prompts_consts import PromptsConsts
+from .consts.prompts_consts import PromptsConsts
 
 config_path = 'resources/config.json'
 with open(config_path, 'r') as config_file:

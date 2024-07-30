@@ -20,6 +20,7 @@ def pesquisa():
             "justificativa": justificativa,
             "referencias": referencia
         }
-        return jsonify({'body': response_body}), 200
+        return jsonify(response_body), 200
     except Exception as e:
         return jsonify({'Erro': str(e)}), 500
+    
