@@ -5,6 +5,7 @@ from util.PdfUtil import PdfUtil
 from util.StringUtil import StringUtil
 from util.VetorialUtil import VetorialUtil
 from util.HtmlUtil import HtmlUtil
+import json
 
 def insere_dados(caminho_arquivos, collection_name, host_refencia):
     try:
@@ -52,7 +53,7 @@ def processa_arquivo(file_path, collection_name, file_referencia):
     except Exception as e:
         logging.error(f"Erro ao processar o arquivo {file_path}: {e}")
 
-def realiza_pesquisa(query, collection_name):
+def realiza_pesquisa(query, collection_name, login):
     try:
         logging.info(f"Realizando pesquisa: {query}")
         query_embedding = VetorialUtil.monta_pergunta(query)
@@ -60,8 +61,19 @@ def realiza_pesquisa(query, collection_name):
 
         if not search_results: 
             return 'Resposta não encontrada'
+        
+        token = recupera_token_usuario(login)
+        logging.info(f"O token para {login} recuperado com sucesso")
+
+        if not token:
+             return 'Usuário sem token do ChatGpt cadastrado no servidor'
     
-        return HtmlUtil.formatar_resultado_pesquisa(search_results)
+        return HtmlUtil.formatar_resultado_pesquisa(search_results, query, token)
     except Exception as e:
         logging.error(f"Erro ao realizar a pesquisa '{query}': {e}")
-        raise        
+        raise     
+
+def recupera_token_usuario(login):
+    with open('users.json', 'r') as file:
+        data = json.load(file)
+        return data.get(login)

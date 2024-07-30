@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 class ApiRepository {
   ApiRepository(this._dio) {
-    _dio.options.baseUrl = 'https://viacep.com.br/';
+    _dio.options.baseUrl = 'http://localhost:5000/';
   }
 
   final Dio _dio;

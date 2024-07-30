@@ -7,10 +7,12 @@ main = Blueprint('main', __name__)
 def pesquisa():
     try:
         query = request.json.get('pergunta')
+        login = request.json.get('login')
+
         if not query:
             return jsonify({'Erro': 'Pergunta não informada.'}), 400
 
-        resposta, referencia = realiza_pesquisa(query, current_app.config['collection_name'])
+        resposta, referencia = realiza_pesquisa(query, current_app.config['collection_name'], login)
         justificativa = "TODO"
 
         response_body = {
@@ -20,4 +22,4 @@ def pesquisa():
         }
         return jsonify({'body': response_body}), 200
     except Exception as e:
-        return jsonify({'Erro': str(e)}), 400
+        return jsonify({'Erro': str(e)}), 500
