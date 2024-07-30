@@ -8,5 +8,10 @@
     "qntd_caracteres_pesquisar": 1000,
     "qntd_respostas": 1,
 
-    "host_referencia": "https://help.edusoft.inf.br/doku.php?id="
+    "host_referencia": "https://help.edusoft.inf.br/doku.php?id=",
+
+    "modo_armazenamento_database": "local",
+    "path_armazenamento_database": "C:/Bertimbau AI/database",
+
+    "is_treina_ai": true
 }

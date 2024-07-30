@@ -15,7 +15,10 @@ transformer = SentenceTransformer(config['modelo_linguagem'], device="cpu", toke
 
 # Cria um banco de dados em memória pelo qdrant
 # rant que posteriormente pode ser consultado para buscas pelo modelo de linguagem
-qdrant_client = QdrantClient(":memory:")
+if 'modo_armazenamento_database' in config and config['modo_armazenamento_database'] == 'memory':
+    qdrant_client = QdrantClient(":memory:")
+else:
+    qdrant_client = QdrantClient(path="C:/Bertimbau AI/database")
 
 class VetorialUtil:
 

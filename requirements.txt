@@ -7,3 +7,4 @@ ipython
 Flask
 json
 requests
+CORS
