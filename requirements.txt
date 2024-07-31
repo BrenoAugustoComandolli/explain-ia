@@ -8,3 +8,4 @@ Flask
 json
 requests
 CORS
+flask_cors

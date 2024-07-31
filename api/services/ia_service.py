@@ -66,7 +66,7 @@ def realiza_pesquisa(query, collection_name, login):
         logging.info(f"O token para {login} recuperado com sucesso")
 
         if not token:
-             raise Exception('Usuário sem token do ChatGpt cadastrado no servidor')
+             raise Exception('Usuário sem token do Gemini cadastrado no servidor')
     
         return HtmlUtil.formatar_resultado_pesquisa(search_results, query, token)
     except Exception as e:
