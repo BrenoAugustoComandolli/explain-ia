@@ -13,8 +13,7 @@ def pesquisa():
             return jsonify({'Erro': 'Pergunta não informada.'}), 400
 
         resposta, referencia = realiza_pesquisa(query, current_app.config['collection_name'], login)
-        justificativa = "Resposta montada com base na busca de prováveis respostas no Help da Edusoft, "
-        "Depois melhorada com a utilização do Gemini da Google (Posteriormente uma outra IA irá mostrar nesse campo, o passo a passo que foi usado para encontrar a resposta)"
+        justificativa = "Resposta montada com base na busca de prováveis respostas no Help da Edusoft, Depois melhorada com a utilização do Gemini da Google (Posteriormente uma outra IA irá mostrar nesse campo, o passo a passo que foi usado para encontrar a resposta)"
 
         response_body = {
             "resposta": resposta,
