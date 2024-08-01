@@ -1,12 +1,12 @@
 {
-    "token": "COLOCAR_TOKEN",
+    "token": "TOKEN",
     "modelo_linguagem": "neuralmind/bert-large-portuguese-cased",
 
     "collection_name": "help",
-    "caminho_arquivos": "C:/Bertimbau AI/Arquivos/teste",
+    "caminho_arquivos": "C:/Bertimbau AI/Arquivos/pages_teste_academico",
 
-    "qntd_caracteres_pesquisar": 1000,
-    "qntd_respostas": 1,
+    "qntd_caracteres_pesquisar": 10000,
+    "qntd_respostas": 3,
 
     "host_referencia": "https://help.edusoft.inf.br/doku.php?id=",
 

@@ -1,5 +1,6 @@
 import json
-from sentence_transformers import SentenceTransformer
+import torch
+from transformers import AutoTokenizer, AutoModel
 from qdrant_client import QdrantClient
 from qdrant_client.http.models import PointStruct, models
 import uuid
@@ -8,10 +9,9 @@ config_path = 'resources/config.json'
 with open(config_path, 'r') as config_file:
     config = json.load(config_file)
 
-# Usa o modelo de linguagem BERT que é da Google para ter um pré-treinamento em entendimento de textos
-# O modelo usado no tranformer é um modelo em português e irá usar a GPU para melhor desempenho na busca de sentenças que
-# atendem as necessidades do usuário
-transformer = SentenceTransformer(config['modelo_linguagem'], device="cpu", token=config['token'])
+# Load the pre-trained BERT model and tokenizer
+tokenizer = AutoTokenizer.from_pretrained('neuralmind/bert-base-portuguese-cased', do_lower_case=False)
+model = AutoModel.from_pretrained('neuralmind/bert-base-portuguese-cased')
 
 # Cria um banco de dados em memória pelo qdrant
 # rant que posteriormente pode ser consultado para buscas pelo modelo de linguagem
@@ -27,19 +27,21 @@ class VetorialUtil:
     @staticmethod
     def get_embedding(pedacos_texto, file_referencia):
         pontos = []
-        for idx, pedaco in enumerate(pedacos_texto):
+        for pedaco in pedacos_texto:
             ponto_id = str(uuid.uuid4())
-            embedding = transformer.encode(pedaco).tolist()
+            inputs = tokenizer(pedaco, return_tensors='pt')
+            with torch.no_grad():
+                outputs = model(**inputs)
+                embedding = outputs.last_hidden_state[:, 0, :].squeeze().tolist()  # Use [CLS] token's embedding
             pontos.append(PointStruct(id=ponto_id, vector=embedding, payload={"filename": file_referencia, 'text': pedaco}))
         return pontos
-    
-    # Cria uma coleção de vetores dentro do banco qdrant para posterior busca pelo modelo de linguagem
+
     @staticmethod
     def cria_collection_vetorial(collection_name):
         qdrant_client.recreate_collection(
             collection_name=collection_name,
             vectors_config=models.VectorParams(
-                size=transformer.get_sentence_embedding_dimension(),
+                size=model.config.hidden_size,
                 distance=models.Distance.COSINE
             )
         )
@@ -52,9 +54,12 @@ class VetorialUtil:
     # Monta uma pergunta para posterior consulta ao modelo de linguagem, montando um embedding
     @staticmethod
     def monta_pergunta(pergunta):
-        return transformer.encode(pergunta).tolist()
+        inputs = tokenizer(pergunta, return_tensors='pt')
+        with torch.no_grad():
+            outputs = model(**inputs)
+            embedding = outputs.last_hidden_state[:, 0, :].squeeze().tolist()  # Use [CLS] token's embedding
+        return embedding
     
-    # Busca em uma colletion a partir de um embedding resultados possíveis para a pergunta, trazendo em uma lista
     @staticmethod
     def pesquisa_banco_vetorial(collection_name, embedding):
         search_result = qdrant_client.search(
@@ -66,5 +71,3 @@ class VetorialUtil:
         for resultado in search_result:
             prompt.append({"score": resultado.score, "text": resultado.payload["text"].replace("\n", " "), "arquivo": resultado.payload["filename"]})
         return prompt
-    
-    
