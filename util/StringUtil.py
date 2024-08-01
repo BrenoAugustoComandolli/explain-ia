@@ -10,7 +10,7 @@ class StringUtil:
     def get_pedacos_texto(texto_pdf):
         divisor = CharacterTextSplitter(separator='\n', 
                                         chunk_size=config['qntd_caracteres_pesquisar'], 
-                                        chunk_overlap=200, 
+                                        chunk_overlap=1000, 
                                         length_function=len)
         pedacos = divisor.split_text(texto_pdf)
         return pedacos
